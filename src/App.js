@@ -10,8 +10,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/">
-          <Route index element={<Home />} />
+        <Route path="/" element={<Home />}>
           <Route path="login" element={<Login />} />
           <Route path="users">
             <Route index element={<List />} />
@@ -23,6 +22,10 @@ function App() {
             <Route path=":productId" element={<Single />} />
             {/* <Route path='new' element={<New />} /> */}
           </Route>
+          {/* <Route path="dashboard" element={<Test />}>
+            <Route path="messages" element={<DashboardMessages />} />
+            <Route path="yes" element={<Confirmation />} />
+          </Route> */}
         </Route>
       </Routes>
     </BrowserRouter>
