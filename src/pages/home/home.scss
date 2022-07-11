@@ -5,3 +5,15 @@
     flex: 6;
   }
 }
+
+.list-container {
+  padding: 20px;
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  margin: 20px;
+
+  .list-title {
+    font-weight: 500;
+    color: gray;
+    margin-bottom: 15px;
+  }
+}
