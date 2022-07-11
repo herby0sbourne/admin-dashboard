@@ -1,10 +1,8 @@
 import React from 'react';
 import { Outlet, useOutlet } from 'react-router-dom';
-import Chart from '../../components/chart/Chart';
 import Navbar from '../../components/navbar/Navbar';
-import Widgets from '../../components/widget/Widgets';
 import Sidebar from '../../components/sidebar/Sidebar';
-import Featured from '../../components/featured/Featured';
+import HomeDashboard from '../../components/home-dashboard/HomeDashboard';
 
 import './home.scss';
 
@@ -15,15 +13,7 @@ const Home = () => {
       <Sidebar />
       <div className="home-container">
         <Navbar />
-        {outlet || (
-          <>
-            <Widgets />{' '}
-            <div className="charts">
-              <Featured />
-              <Chart />
-            </div>
-          </>
-        )}
+        {outlet || <HomeDashboard />}
         {/* <Outlet /> */}
       </div>
     </div>
