@@ -2,6 +2,10 @@
   flex: 2;
   box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
   padding: 10px;
+  // test data below
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   .top {
     display: flex;
@@ -22,6 +26,8 @@
     align-items: center;
     justify-content: center;
     gap: 15px;
+    // test data below
+    height: 100%;
 
     .featured-chart {
       width: 100px;
