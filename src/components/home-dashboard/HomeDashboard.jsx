@@ -1,6 +1,6 @@
 import React from 'react';
-import List from '../list/List';
 import Chart from '../chart/Chart';
+import ListTable from '../list-table/ListTable';
 import Widgets from '../widget/Widgets';
 import Featured from '../featured/Featured';
 
@@ -14,7 +14,7 @@ const HomeDashboard = () => {
       </div>
       <div className="list-container">
         <div className="list-title">Latest Transaction</div>
-        <List />
+        <ListTable />
       </div>
     </>
   );
