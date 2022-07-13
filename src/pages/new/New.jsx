@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined';
+import FormInput from '../../components/from-input/FormInput';
 
 import './new.scss';
-import FormInput from '../../components/from-input/FormInput';
 
 const New = ({ title, inputs }) => {
   const [file, setFile] = useState('');
-  console.log(file);
   return (
     <div>
       <div className="new">
