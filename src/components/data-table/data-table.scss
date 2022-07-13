@@ -2,6 +2,24 @@
   height: 600px;
   padding: 20px;
 
+  .data-title {
+    width: 100%;
+    font-size: 18px;
+    color: gray;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+
+    // .link {
+    //   color: green;
+    //   font-size: 16px;
+    //   font-weight: 400;
+    //   border: 1px solid green;
+    //   padding: 5px;
+    //   border-radius: 5px;
+    // }
+  }
+
   .cellWithImg {
     display: flex;
     justify-content: center;
