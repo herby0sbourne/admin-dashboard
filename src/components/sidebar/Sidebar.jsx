@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonIcon from '@mui/icons-material/Person';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
@@ -11,31 +12,42 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import SettingsSystemDaydreamOutlinedIcon from '@mui/icons-material/SettingsSystemDaydreamOutlined';
 import PsychologyOutlinedIcon from '@mui/icons-material/PsychologyOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+
 import './sidebar.scss';
 
 const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="top">
-        <span className="logo">Admin Dashboard</span>
+        <Link to={'/'}>
+          <span className="logo">Admin Dashboard</span>
+        </Link>
       </div>
       {/* <hr /> */}
       <div className="center">
         <ul>
+          {/* MAIN */}
           <p className="title">Main</p>
-          <li>
-            <DashboardIcon className="icon" />
-            <span>Dashboard</span>
-          </li>
+          <Link to={'/'}>
+            <li>
+              <DashboardIcon className="icon" />
+              <span>Dashboard</span>
+            </li>
+          </Link>
+          {/* LIST */}
           <p className="title">List</p>
-          <li>
-            <PersonIcon className="icon" />
-            <span>Users</span>
-          </li>
-          <li>
-            <StoreIcon className="icon" />
-            <span>Products</span>
-          </li>
+          <Link to={'/users'}>
+            <li>
+              <PersonIcon className="icon" />
+              <span>Users</span>
+            </li>
+          </Link>
+          <Link to={'/products'}>
+            <li>
+              <StoreIcon className="icon" />
+              <span>Products</span>
+            </li>
+          </Link>
           <li>
             <CreditCardIcon className="icon" />
             <span>Order</span>
@@ -44,7 +56,8 @@ const Sidebar = () => {
             <LocalShippingIcon className="icon" />
             <span>Delivery</span>
           </li>
-          <p className="title">UseFul</p>
+          {/* USEFULL */}
+          <p className="title">UseFull</p>
           <li>
             <InsertChartIcon className="icon" />
             <span>Stats</span>
@@ -53,6 +66,7 @@ const Sidebar = () => {
             <NotificationsNoneIcon className="icon" />
             <span>Notifications</span>
           </li>
+          {/* SERVICE */}
           <p className="title">Service</p>
           <li>
             <SettingsSystemDaydreamOutlinedIcon className="icon" />
@@ -79,7 +93,18 @@ const Sidebar = () => {
       </div>
       <div className="bottom">
         <div className="color-option"></div>
-        <div className="color-option"></div>
+        <div
+          className="color-option"
+          onClick={() => {
+            const app = document.querySelector('.app');
+            if (app.classList.contains('dark')) {
+              app.classList.remove('dark');
+              return;
+            }
+            // app.classList.toggle('dark')
+            app.classList.add('dark');
+          }}
+        ></div>
       </div>
     </div>
   );
