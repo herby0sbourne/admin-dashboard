@@ -1,6 +1,6 @@
 import React from 'react';
-import Widget from './Widget';
 
+import Widget from './Widget';
 import './widgets.scss';
 
 const DATA = [
