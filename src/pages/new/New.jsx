@@ -1,11 +1,60 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined';
-import FormInput from '../../components/from-input/FormInput';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+// import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 
+import { auth, createUser, uploadFile } from '../../firebase/firebase';
+import FormInput from '../../components/from-input/FormInput';
 import './new.scss';
 
 const New = ({ title, inputs }) => {
   const [file, setFile] = useState('');
+  const [data, setData] = useState({});
+  const [perc, setPerc] = useState(null);
+  const navigate = useNavigate();
+
+  //todo use percentage setState on button to disable on upload
+
+  useEffect(() => {
+    const uploadImage = async () => {
+      if (file) {
+        const imgUrl = await uploadFile(file);
+        setData((prev) => ({ ...prev, img: imgUrl }));
+        console.log(imgUrl);
+      }
+    };
+
+    uploadImage();
+  }, [file]);
+
+  const handleInput = (e) => {
+    const { id, value } = e.target;
+    setData({ ...data, [id]: value });
+  };
+
+  const handleAddProd = async (e) => {
+    e.preventDefault();
+
+    try {
+      const userAuth = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+
+      await createUser(userAuth, data);
+      navigate(-1);
+
+      // await setDoc(doc(db, 'users', userAuth.user.uid), {
+      //   ...data,
+      //   createdAt: new Date(),
+      // });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <div className="new">
@@ -25,7 +74,7 @@ const New = ({ title, inputs }) => {
               />
             </div>
             <div className="right">
-              <form>
+              <form onSubmit={handleAddProd}>
                 <div className="form-input">
                   <label htmlFor="image">
                     Upload Image:
@@ -40,22 +89,14 @@ const New = ({ title, inputs }) => {
                     style={{ display: 'none' }}
                   />
                 </div>
-                {inputs.map(({ id, ...input }) => {
-                  return <FormInput key={id} {...input} />;
+                {inputs.map((input) => {
+                  return (
+                    <FormInput key={input.id} {...input} handleInput={handleInput} />
+                  );
                 })}
-                {/* <FormInput
-                  forId="username"
-                  label="Username"
-                  type="text"
-                  placeholder="John_doe eat"
-                />
-                <FormInput
-                  forId="fullname"
-                  label="Name and Surname"
-                  type="text"
-                  placeholder="John Doe"
-                /> */}
-                <button>Send</button>
+                <button disabled={perc !== null && perc < 100} type="submit">
+                  Send
+                </button>
               </form>
             </div>
           </div>
