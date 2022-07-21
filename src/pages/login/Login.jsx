@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+
 import { auth } from '../../firebase/firebase';
+import { AuthContext } from '../../context/AuthContext';
 import './login.scss';
 
 const Login = () => {
-  const [error, setError] = useState(true);
-  const [user, setUser] = useState({ email: '', password: '' });
+  const { addUser } = useContext(AuthContext);
+  const [error, setError] = useState(false);
+  const [user, setUser] = useState({ email: 'test@123.com', password: '123456789' });
+  // const [user, setUser] = useState({ email: '', password: '' });
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     signInWithEmailAndPassword(auth, user.email, user.password)
       .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
+        const { email, displayName, uid } = userCredential.user;
+        addUser({ email, displayName, uid });
         navigate('/');
       })
       .catch((error) => {
@@ -32,11 +37,18 @@ const Login = () => {
   return (
     <div className="login">
       <form onSubmit={handleSubmit}>
-        <input type="email" name="email" placeholder="email" onChange={handleChange} />
+        <input
+          type="email"
+          name="email"
+          placeholder="email"
+          onChange={handleChange}
+          value={user.email}
+        />
         <input
           type="password"
           name="password"
           placeholder="password"
+          value={user.password}
           onChange={handleChange}
         />
         <button type="submit">Login</button>
