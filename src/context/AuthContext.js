@@ -6,8 +6,6 @@ const INITIAL_STATE = {
   addUser: () => {},
 };
 
-// INITIAL_STATE.currentUser = info('herby');
-
 export const AuthContext = createContext(INITIAL_STATE);
 AuthContext.displayName = 'AuthContext';
 
