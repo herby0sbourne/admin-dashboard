@@ -3,11 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
 import { auth } from '../../firebase/firebase';
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext2 } from '../../context/AuthContext2';
+// import { AuthContext } from '../../context/AuthContext';
+
 import './login.scss';
 
 const Login = () => {
-  const { addUser } = useContext(AuthContext);
+  const { setCurrentUser } = useContext(AuthContext2);
+  // const { addUser } = useContext(AuthContext2);
   const [error, setError] = useState(false);
   const [user, setUser] = useState({ email: 'test@123.com', password: '123456789' });
   // const [user, setUser] = useState({ email: '', password: '' });
@@ -19,7 +22,8 @@ const Login = () => {
     signInWithEmailAndPassword(auth, user.email, user.password)
       .then((userCredential) => {
         const { email, displayName, uid } = userCredential.user;
-        addUser({ email, displayName, uid });
+        // addUser({ email, displayName, uid });
+        setCurrentUser({ email, displayName, uid });
         navigate('/');
       })
       .catch((error) => {
