@@ -1,5 +1,6 @@
-import React from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { signOut } from 'firebase/auth';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonIcon from '@mui/icons-material/Person';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
@@ -12,10 +13,22 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import SettingsSystemDaydreamOutlinedIcon from '@mui/icons-material/SettingsSystemDaydreamOutlined';
 import PsychologyOutlinedIcon from '@mui/icons-material/PsychologyOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import { auth } from '../../firebase/firebase';
+// import { AuthContext } from '../../context/AuthContext';
+import { AuthContext2 } from '../../context/AuthContext2';
 
 import './sidebar.scss';
 
 const Sidebar = () => {
+  // const { addUser } = useContext(AuthContext);
+  const { setCurrentUser } = useContext(AuthContext2);
+
+  const logOut = () => {
+    // addUser(null);
+    setCurrentUser(null);
+    signOut(auth);
+  };
+
   return (
     <div className="sidebar">
       <div className="top">
@@ -85,7 +98,7 @@ const Sidebar = () => {
             <AccountCircleOutlinedIcon className="icon" />
             <span>Profile</span>
           </li>
-          <li>
+          <li onClick={logOut}>
             <ExitToAppIcon className="icon" />
             <span>Logout</span>
           </li>
