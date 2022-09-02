@@ -1,31 +1,29 @@
-import { useContext, useState } from 'react';
-import { useEffect } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-// import { AuthContext } from '../../context/AuthContext';
-import { AuthContext2 } from '../../context/AuthContext2';
+import { AuthContext } from '../../context/AuthContext';
 import { getCurrentUser } from '../../firebase/firebase';
 import Spinner from '../../components/spinner/Spinner';
 
 const CheckUserSession = () => {
   const [isLoading, setIsLoading] = useState(true);
-  // const { currentUser, addUser } = useContext(AuthContext);
-  const { currentUser, setCurrentUser } = useContext(AuthContext2);
+  const { currentUser, addUser } = useContext(AuthContext);
   const location = useLocation();
 
   useEffect(() => {
+    let isMounted = true;
     const user = async () => {
       try {
         const user = await getCurrentUser();
-        // addUser(user);
-        setCurrentUser(user);
+        addUser(user);
       } catch (error) {
         console.log(error);
       } finally {
-        setIsLoading(false);
+        isMounted && setIsLoading(false);
       }
       console.log('checSession ran');
     };
     user();
+    return () => (isMounted = false);
     // eslint-disable-next-line
   }, []);
 

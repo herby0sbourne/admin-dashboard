@@ -14,18 +14,15 @@ import SettingsSystemDaydreamOutlinedIcon from '@mui/icons-material/SettingsSyst
 import PsychologyOutlinedIcon from '@mui/icons-material/PsychologyOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { auth } from '../../firebase/firebase';
-// import { AuthContext } from '../../context/AuthContext';
-import { AuthContext2 } from '../../context/AuthContext2';
+import { AuthContext } from '../../context/AuthContext';
 
 import './sidebar.scss';
 
 const Sidebar = () => {
-  // const { addUser } = useContext(AuthContext);
-  const { setCurrentUser } = useContext(AuthContext2);
+  const { addUser } = useContext(AuthContext);
 
   const logOut = () => {
-    // addUser(null);
-    setCurrentUser(null);
+    addUser(null);
     signOut(auth);
   };
 

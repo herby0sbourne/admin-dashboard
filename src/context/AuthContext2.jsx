@@ -1,7 +1,5 @@
 import React, { createContext, useState } from 'react';
 
-// import { auth, getCurrentUser } from '../firebase/firebase';
-
 export const AuthContext2 = createContext({});
 AuthContext2.displayName = 'AuthContext2';
 
