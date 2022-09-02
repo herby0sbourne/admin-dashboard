@@ -1,0 +1,21 @@
+.loader {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+    display: inline-block;
+
+    circle {
+      stroke: #6439ff;
+    }
+    g {
+      fill: #6439ff;
+    }
+  }
+}
