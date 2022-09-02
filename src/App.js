@@ -1,23 +1,16 @@
-import { useContext, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import New from './pages/new/New';
 import List from './pages/list/List';
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
 import Single from './pages/single/Single';
-import { AuthContext } from './context/AuthContext';
-
-// import './App.css';
-import './theme/dark.scss';
 import { userInputs, productInputs } from './data/formfieldData';
-// import { auth } from './firebase/firebase';
-import RequireAuth from './components/auth/RequireAuth';
+import CheckUserSession from './components/auth/checkUserSession';
+// import RequireAuth from './components/auth/RequireAuth';
+
+import './theme/dark.scss';
 
 function App() {
-  // const { userAuth } = useContext(AuthContext);
-
-  // console.log(userAuth.currentUser);
-
   return (
     <div className="app">
       <BrowserRouter>
@@ -26,7 +19,8 @@ function App() {
           <Route path="login" element={<Login />} />
 
           {/* Protected Routes */}
-          <Route element={<RequireAuth />}>
+          {/* <Route element={<RequireAuth />}> */}
+          <Route element={<CheckUserSession />}>
             <Route path="/" element={<Home />}>
               <Route path="users">
                 <Route index element={<List />} />
@@ -46,6 +40,8 @@ function App() {
               </Route>
             </Route>
           </Route>
+
+          {/* </Route> */}
         </Routes>
       </BrowserRouter>
     </div>
